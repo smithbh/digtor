@@ -17,7 +17,7 @@ dnsquery_443="${ip}443${EXIT_NODE_TEST_ADDR}${TORDNS}";
 result_80=$(dig $dnsquery_80 | grep '127.0.0');
 result_443=$(dig $dnsquery_443 | grep '127.0.0');
 
-if [ "$result_80" != "" ] || [ "$result_443" != ""] ;then
+if [ "$result_80" != "" ] || [ "$result_443" != "" ] ;then
 	echo "TOR EXIT NODE DETECTED FOR HTTP/HTTPS PORT(S).";
 else
 	echo "Not a known Tor exit node.";
