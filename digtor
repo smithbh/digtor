@@ -1,5 +1,17 @@
 #!/bin/bash
 
+if [ -z "$1" ] || [ "$1" == "-h" ]
+	then
+		echo "";
+		echo "                            DIGTOR";
+		echo "About: this is a basic tool to test if an IP is that of an exit node.";
+		echo "To use, simply run the digtor command with a single IP address as an argument.";
+		echo "";
+		echo "digtor <ipv4_address>" ;
+		echo "";
+		exit 1
+fi
+
 ip="";
 EXIT_NODE_TEST_ADDR=".1.2.3.4.";
 TORDNS="ip-port.exitlist.torproject.org";
@@ -18,7 +30,9 @@ result_80=$(dig $dnsquery_80 | grep '127.0.0');
 result_443=$(dig $dnsquery_443 | grep '127.0.0');
 
 if [ "$result_80" != "" ] || [ "$result_443" != "" ] ;then
-	echo "TOR EXIT NODE DETECTED FOR HTTP/HTTPS PORT(S).";
+	echo "TOR EXIT NODE DETECTED FOR HTTP/HTTPS PORT(S) at:";
+	echo "${1}:80";
+	echo "${1}:443";
 else
 	echo "Not a known Tor exit node.";
 fi
